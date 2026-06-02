@@ -93,7 +93,7 @@
         MOUSE_layer {
             display-name = "MOUSE";
             bindings = <
-&kp TAB   &kp Q     &kp W          &kp E     &kp R     &kp T                                                         &trans      &mkp MB3    &trans  &trans    &trans  &kp BSPC
+&kp ESC   &kp Q     &kp W          &kp E     &kp R     &kp T                                                         &trans      &mkp MB3    &trans  &trans    &trans  &kp BSPC
 &kp CAPS  &kp A     &kp S          &kp D     &kp F     &kp G      &mkp LCLK                         &mkp LCLK        &none       &mkp LCLK   &none   &trans    &trans  &kp ENTER
 &kp LSHFT &kp Z     &kp X          &kp C     &kp V     &kp B      &msc SCRL_DOWN   &msc SCRL_UP     &none  &none     &trans      &mkp RCLK   &trans  &trans    &trans  &trans
 &kp LCTRL &kp LGUI  &kp  LALT      &none     &mo 2     &kp SPACE  &mo 1                                    &mo 1     &kp SPACE   &to 2       &trans   &trans    &trans  &trans
