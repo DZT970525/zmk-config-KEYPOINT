@@ -223,7 +223,7 @@ layers:
   - LOWER
   - LOWER
   - SPACE
-  - {t: RAISE, h: toggle}
+  - RAISE
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
