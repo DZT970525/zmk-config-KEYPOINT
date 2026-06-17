@@ -178,11 +178,11 @@ layers:
   - E
   - R
   - T
-  - {t: ▽, type: trans}
-  - '&mkp MB3'
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - Y
+  - {t: U, h: '&mkp MB3'}
+  - I
+  - O
+  - P
   - BSPC
   - CAPS
   - A
@@ -192,11 +192,11 @@ layers:
   - G
   - '&mkp LCLK'
   - '&mkp LCLK'
-  - ''
-  - '&mkp LCLK'
-  - ''
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - H
+  - {t: J, h: '&mkp MB1'}
+  - K
+  - L
+  - ;
   - ENTER
   - LSHFT
   - Z
@@ -208,25 +208,25 @@ layers:
   - '&msc SCRL_UP'
   - ''
   - ''
-  - {t: ▽, type: trans}
-  - '&mkp RCLK'
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - N
+  - {t: M, h: '&mkp MB2'}
+  - ','
+  - .
+  - /
+  - RSHFT
   - LCTRL
   - LGUI
   - LALT
   - ''
   - RAISE
-  - SPACE
+  - '&mkp MB1'
   - LOWER
-  - LOWER
-  - SPACE
+  - '&mkp MB1'
+  - '&tdRMCLK'
   - RAISE
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - MUTE
+  - '-'
+  - '='
+  - '`'
   RESERVE: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
     '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']
