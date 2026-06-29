@@ -22,6 +22,8 @@
 #include <zmk/events/hid_indicators_changed.h>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <zmk/hid.h>
+#include <zmk/hid_indicators.h>
+#include <zmk/endpoints.h>
 
 #include "trackpad_led.h"
 #include "a320.h"
@@ -86,12 +88,18 @@ static bool arrow_key_pressed = false;
 static bool slow_key_pressed = false;
 static bool last_scroll_key_pressed = false; // ★ NEW
 static bool last_arrow_key_pressed = false;
+static bool f_slow = false;
+static bool k_slow = false;
+static bool g_arrow = false;
+static bool l_arrow = false;
 uint32_t last_packet_time = 0;
 static bool touched = false;
 
 /* ==== HID indicators ==== */
 static zmk_hid_indicators_t current_indicators;
 #define HID_INDICATORS_CAPS_LOCK (1 << 1)
+#define HID_INDICATORS_SLOW_KEY (1 << 5)
+#define HID_INDICATORS_ARROW_KEY (1 << 6)
 /* =========================
  *   HID indicator listener
  * ========================= */
@@ -106,15 +114,34 @@ static int hid_indicators_listener(const zmk_event_t *eh) {
 ZMK_LISTENER(a320_hid_listener, hid_indicators_listener);
 ZMK_SUBSCRIPTION(a320_hid_listener, zmk_hid_indicators_changed);
 
+static void update_hid_indicators_slow_arrow(void) {
+    zmk_hid_indicators_t val = zmk_hid_indicators_get_current_profile();
+    if (slow_key_pressed) {
+        val |= HID_INDICATORS_SLOW_KEY;
+    } else {
+        val &= ~HID_INDICATORS_SLOW_KEY;
+    }
+    if (arrow_key_pressed) {
+        val |= HID_INDICATORS_ARROW_KEY;
+    } else {
+        val &= ~HID_INDICATORS_ARROW_KEY;
+    }
+    zmk_hid_indicators_set_profile(val, zmk_endpoints_selected());
+}
+
 /* ========= Space + Slow Key listener ========= */
 static int special_key_listener_cb(const zmk_event_t *eh) {
     const struct zmk_position_state_changed *ev = as_zmk_position_state_changed(eh);
     if (!ev)
         return 0;
-    if (ev->position == 17 || ev->position == 23) {
-        arrow_key_pressed = ev->state;
-        LOG_INF("arrow_key position=%d %s", ev->position, arrow_key_pressed ? "PRESSED" : "RELEASED");
+
+    if (ev->position == 17) {
+        g_arrow = ev->state;
     }
+    if (ev->position == 23) {
+        l_arrow = ev->state;
+    }
+    arrow_key_pressed = g_arrow || l_arrow;
 
     // Scroll key (Space)
     if (ev->position == 48 || ev->position == 49) {
@@ -122,9 +149,17 @@ static int special_key_listener_cb(const zmk_event_t *eh) {
         LOG_INF("space position=49 %s", scroll_key_pressed ? "PRESSED" : "RELEASED");
     }
 
-    if (ev->position == 16 || ev->position == 22) {
-        slow_key_pressed = ev->state;
-        LOG_INF("slow_key position=%d %s", ev->position, slow_key_pressed ? "PRESSED" : "RELEASED");
+    if (ev->position == 16) {
+        f_slow = ev->state;
+    }
+    if (ev->position == 22) {
+        k_slow = ev->state;
+    }
+    slow_key_pressed = f_slow || k_slow;
+
+    if (ev->position == 16 || ev->position == 17 || ev->position == 22 || ev->position == 23) {
+        LOG_INF("special key pos=%d slow=%d arrow=%d", ev->position, slow_key_pressed, arrow_key_pressed);
+        update_hid_indicators_slow_arrow();
     }
 
     return 0;

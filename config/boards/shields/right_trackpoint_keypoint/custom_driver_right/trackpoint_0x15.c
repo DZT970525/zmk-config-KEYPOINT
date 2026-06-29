@@ -89,11 +89,17 @@ static bool arrow_key_pressed = false;
 static bool slow_key_pressed = false;
 static bool last_scroll_key_pressed = false; // ★ NEW
 static bool last_arrow_key_pressed = false;
+static bool local_slow_key = false;
+static bool local_arrow_key = false;
+static bool remote_slow_key = false;
+static bool remote_arrow_key = false;
 uint32_t last_packet_time = 0;
 
 /* ==== HID indicators ==== */
 static zmk_hid_indicators_t current_indicators;
 #define HID_INDICATORS_CAPS_LOCK (1 << 1)
+#define HID_INDICATORS_SLOW_KEY (1 << 5)
+#define HID_INDICATORS_ARROW_KEY (1 << 6)
 /* =========================
  *   HID indicator listener
  * ========================= */
@@ -101,6 +107,11 @@ static int hid_indicators_listener(const zmk_event_t *eh) {
     const struct zmk_hid_indicators_changed *ev = as_zmk_hid_indicators_changed(eh);
     if (ev) {
         current_indicators = ev->indicators;
+        remote_slow_key = (ev->indicators & HID_INDICATORS_SLOW_KEY) != 0;
+        remote_arrow_key = (ev->indicators & HID_INDICATORS_ARROW_KEY) != 0;
+        slow_key_pressed = local_slow_key || remote_slow_key;
+        arrow_key_pressed = local_arrow_key || remote_arrow_key;
+        LOG_INF("remote indicators: slow=%d arrow=%d", remote_slow_key, remote_arrow_key);
     }
     return ZMK_EV_EVENT_BUBBLE;
 }
@@ -113,8 +124,9 @@ static int special_key_listener_cb(const zmk_event_t *eh) {
     const struct zmk_position_state_changed *ev = as_zmk_position_state_changed(eh);
     if (!ev)
         return 0;
-    if (ev->position == 17 || ev->position == 23) {
-        arrow_key_pressed = ev->state;
+    if (ev->position == 23) {
+        local_arrow_key = ev->state;
+        arrow_key_pressed = local_arrow_key || remote_arrow_key;
         LOG_INF("arrow_key position=%d %s", ev->position, arrow_key_pressed ? "PRESSED" : "RELEASED");
     }
 
@@ -125,8 +137,9 @@ static int special_key_listener_cb(const zmk_event_t *eh) {
     }
 
     // ★ NEW: Slow key
-    if (ev->position == 16 || ev->position == 22) {
-        slow_key_pressed = ev->state;
+    if (ev->position == 22) {
+        local_slow_key = ev->state;
+        slow_key_pressed = local_slow_key || remote_slow_key;
         LOG_INF("slow_key position=%d %s", ev->position, slow_key_pressed ? "PRESSED" : "RELEASED");
     }
 
