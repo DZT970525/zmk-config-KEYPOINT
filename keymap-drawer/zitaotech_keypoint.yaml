@@ -47,7 +47,7 @@ layers:
   - LEFT ALT
   - RAISE
   - Ctl+UP ARROW
-  - SPACE
+  - {t: SPACE, h: LGUI}
   - {t: ESC, h: LGUI}
   - LOWER
   - LOWER
@@ -104,12 +104,12 @@ layers:
   - LEFT ALT
   - '&td_dShft_0'
   - BT CLR
-  - SPACE
+  - {t: SPACE, h: LGUI}
   - {t: ESC, h: LGUI}
   - {t: ENTER, type: held}
   - ''
   - ''
-  - SPACE
+  - {t: SPACE, h: RGUI}
   - OUT TOG
   - ''
   - {t: ▽, type: trans}
@@ -166,7 +166,7 @@ layers:
   - ''
   - ''
   - ''
-  - ''
+  - RGUI
   - Ctl+Gui+Q
   - LEFT
   - DOWN
