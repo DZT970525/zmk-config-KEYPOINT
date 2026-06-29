@@ -89,17 +89,30 @@ static bool arrow_key_pressed = false;
 static bool slow_key_pressed = false;
 static bool last_scroll_key_pressed = false; // ★ NEW
 static bool last_arrow_key_pressed = false;
-static bool local_slow_key = false;
-static bool local_arrow_key = false;
 static bool remote_slow_key = false;
 static bool remote_arrow_key = false;
 uint32_t last_packet_time = 0;
+
+/* ========= special key position config ========= */
+static const uint8_t local_slow_positions[] = {22};
+static const uint8_t local_arrow_positions[] = {23};
+#define LOCAL_SLOW_POSITIONS_LEN ARRAY_SIZE(local_slow_positions)
+#define LOCAL_ARROW_POSITIONS_LEN ARRAY_SIZE(local_arrow_positions)
+static bool position_state[56] = {0};
 
 /* ==== HID indicators ==== */
 static zmk_hid_indicators_t current_indicators;
 #define HID_INDICATORS_CAPS_LOCK (1 << 1)
 #define HID_INDICATORS_SLOW_KEY (1 << 5)
 #define HID_INDICATORS_ARROW_KEY (1 << 6)
+
+static bool any_position_active(const uint8_t *positions, uint8_t len) {
+    for (uint8_t i = 0; i < len; i++) {
+        if (position_state[positions[i]]) return true;
+    }
+    return false;
+}
+
 /* =========================
  *   HID indicator listener
  * ========================= */
@@ -109,8 +122,8 @@ static int hid_indicators_listener(const zmk_event_t *eh) {
         current_indicators = ev->indicators;
         remote_slow_key = (ev->indicators & HID_INDICATORS_SLOW_KEY) != 0;
         remote_arrow_key = (ev->indicators & HID_INDICATORS_ARROW_KEY) != 0;
-        slow_key_pressed = local_slow_key || remote_slow_key;
-        arrow_key_pressed = local_arrow_key || remote_arrow_key;
+        slow_key_pressed = any_position_active(local_slow_positions, LOCAL_SLOW_POSITIONS_LEN) || remote_slow_key;
+        arrow_key_pressed = any_position_active(local_arrow_positions, LOCAL_ARROW_POSITIONS_LEN) || remote_arrow_key;
         LOG_INF("remote indicators: slow=%d arrow=%d", remote_slow_key, remote_arrow_key);
     }
     return ZMK_EV_EVENT_BUBBLE;
@@ -124,11 +137,13 @@ static int special_key_listener_cb(const zmk_event_t *eh) {
     const struct zmk_position_state_changed *ev = as_zmk_position_state_changed(eh);
     if (!ev)
         return 0;
-    if (ev->position == 23) {
-        local_arrow_key = ev->state;
-        arrow_key_pressed = local_arrow_key || remote_arrow_key;
-        LOG_INF("arrow_key position=%d %s", ev->position, arrow_key_pressed ? "PRESSED" : "RELEASED");
+
+    if (ev->position < ARRAY_SIZE(position_state)) {
+        position_state[ev->position] = ev->state;
     }
+
+    slow_key_pressed = any_position_active(local_slow_positions, LOCAL_SLOW_POSITIONS_LEN) || remote_slow_key;
+    arrow_key_pressed = any_position_active(local_arrow_positions, LOCAL_ARROW_POSITIONS_LEN) || remote_arrow_key;
 
     // Scroll key (Space)
     if (ev->position == 49) {
@@ -136,11 +151,8 @@ static int special_key_listener_cb(const zmk_event_t *eh) {
         LOG_INF("space position=49 %s", scroll_key_pressed ? "PRESSED" : "RELEASED");
     }
 
-    // ★ NEW: Slow key
-    if (ev->position == 22) {
-        local_slow_key = ev->state;
-        slow_key_pressed = local_slow_key || remote_slow_key;
-        LOG_INF("slow_key position=%d %s", ev->position, slow_key_pressed ? "PRESSED" : "RELEASED");
+    if (ev->position == 22 || ev->position == 23) {
+        LOG_INF("special key pos=%d slow=%d arrow=%d", ev->position, slow_key_pressed, arrow_key_pressed);
     }
 
     return 0;

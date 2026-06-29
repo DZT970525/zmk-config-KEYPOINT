@@ -88,12 +88,15 @@ static bool arrow_key_pressed = false;
 static bool slow_key_pressed = false;
 static bool last_scroll_key_pressed = false; // ★ NEW
 static bool last_arrow_key_pressed = false;
-static bool f_slow = false;
-static bool k_slow = false;
-static bool g_arrow = false;
-static bool l_arrow = false;
 uint32_t last_packet_time = 0;
 static bool touched = false;
+
+/* ========= special key position config ========= */
+static const uint8_t slow_positions[] = {16, 22};
+static const uint8_t arrow_positions[] = {17, 23};
+#define SLOW_POSITIONS_LEN ARRAY_SIZE(slow_positions)
+#define ARROW_POSITIONS_LEN ARRAY_SIZE(arrow_positions)
+static bool position_state[56] = {0};
 
 /* ==== HID indicators ==== */
 static zmk_hid_indicators_t current_indicators;
@@ -113,6 +116,13 @@ static int hid_indicators_listener(const zmk_event_t *eh) {
 
 ZMK_LISTENER(a320_hid_listener, hid_indicators_listener);
 ZMK_SUBSCRIPTION(a320_hid_listener, zmk_hid_indicators_changed);
+
+static bool any_position_active(const uint8_t *positions, uint8_t len) {
+    for (uint8_t i = 0; i < len; i++) {
+        if (position_state[positions[i]]) return true;
+    }
+    return false;
+}
 
 static void update_hid_indicators_slow_arrow(void) {
     zmk_hid_indicators_t val = zmk_hid_indicators_get_current_profile();
@@ -135,27 +145,18 @@ static int special_key_listener_cb(const zmk_event_t *eh) {
     if (!ev)
         return 0;
 
-    if (ev->position == 17) {
-        g_arrow = ev->state;
+    if (ev->position < ARRAY_SIZE(position_state)) {
+        position_state[ev->position] = ev->state;
     }
-    if (ev->position == 23) {
-        l_arrow = ev->state;
-    }
-    arrow_key_pressed = g_arrow || l_arrow;
+
+    slow_key_pressed = any_position_active(slow_positions, SLOW_POSITIONS_LEN);
+    arrow_key_pressed = any_position_active(arrow_positions, ARROW_POSITIONS_LEN);
 
     // Scroll key (Space)
     if (ev->position == 48 || ev->position == 49) {
         scroll_key_pressed = ev->state;
         LOG_INF("space position=49 %s", scroll_key_pressed ? "PRESSED" : "RELEASED");
     }
-
-    if (ev->position == 16) {
-        f_slow = ev->state;
-    }
-    if (ev->position == 22) {
-        k_slow = ev->state;
-    }
-    slow_key_pressed = f_slow || k_slow;
 
     if (ev->position == 16 || ev->position == 17 || ev->position == 22 || ev->position == 23) {
         LOG_INF("special key pos=%d slow=%d arrow=%d", ev->position, slow_key_pressed, arrow_key_pressed);
