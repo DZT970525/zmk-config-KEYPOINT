@@ -111,9 +111,9 @@ static int special_key_listener_cb(const zmk_event_t *eh) {
     const struct zmk_position_state_changed *ev = as_zmk_position_state_changed(eh);
     if (!ev)
         return 0;
-    if (ev->position == 20) {
+    if (ev->position == 17) {
         arrow_key_pressed = ev->state;
-        LOG_INF("space position=49 %s", arrow_key_pressed ? "PRESSED" : "RELEASED");
+        LOG_INF("arrow_key position=%d %s", ev->position, arrow_key_pressed ? "PRESSED" : "RELEASED");
     }
 
     // Scroll key (Space)
@@ -122,9 +122,9 @@ static int special_key_listener_cb(const zmk_event_t *eh) {
         LOG_INF("space position=49 %s", scroll_key_pressed ? "PRESSED" : "RELEASED");
     }
 
-    if (ev->position == 22) {
+    if (ev->position == 16) {
         slow_key_pressed = ev->state;
-        LOG_INF("slow_key position=37 %s", slow_key_pressed ? "PRESSED" : "RELEASED");
+        LOG_INF("slow_key position=%d %s", ev->position, slow_key_pressed ? "PRESSED" : "RELEASED");
     }
 
     return 0;
@@ -219,7 +219,7 @@ static inline void process_arrow_axis(const struct device *dev, int8_t delta, in
         abs_delta = ARROW_INPUT_MAX;
     }
 
-    
+
     float t = (float)abs_delta / SCROLL_INPUT_MAX;
     t = t * t;
 
@@ -229,7 +229,7 @@ static inline void process_arrow_axis(const struct device *dev, int8_t delta, in
     if (divisor < 1)
         divisor = 1;
 
-    *residue += delta; 
+    *residue += delta;
     int16_t arrow_ticks = *residue / divisor;
     if (arrow_ticks != 0) {
         uint16_t key = (arrow_ticks > 0) ? key_pos : key_neg;

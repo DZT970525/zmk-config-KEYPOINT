@@ -113,9 +113,9 @@ static int special_key_listener_cb(const zmk_event_t *eh) {
     const struct zmk_position_state_changed *ev = as_zmk_position_state_changed(eh);
     if (!ev)
         return 0;
-    if (ev->position == 20) {
+    if (ev->position == 23) {
         arrow_key_pressed = ev->state;
-        LOG_INF("space position=49 %s", arrow_key_pressed ? "PRESSED" : "RELEASED");
+        LOG_INF("arrow_key position=%d %s", ev->position, arrow_key_pressed ? "PRESSED" : "RELEASED");
     }
 
     // Scroll key (Space)
@@ -127,7 +127,7 @@ static int special_key_listener_cb(const zmk_event_t *eh) {
     // ★ NEW: Slow key
     if (ev->position == 22) {
         slow_key_pressed = ev->state;
-        LOG_INF("slow_key position=37 %s", slow_key_pressed ? "PRESSED" : "RELEASED");
+        LOG_INF("slow_key position=%d %s", ev->position, slow_key_pressed ? "PRESSED" : "RELEASED");
     }
 
     return 0;
@@ -144,7 +144,7 @@ struct trackpoint_data {
     const struct device *dev;
     struct k_work work;
     struct gpio_callback motion_cb_data;
-    struct k_work_delayable enable_irq_work; 
+    struct k_work_delayable enable_irq_work;
     uint32_t last_packet_time;
     int16_t scroll_residue_x;
     int16_t scroll_residue_y;
@@ -249,7 +249,7 @@ static inline void process_arrow_axis(const struct device *dev, int8_t delta, in
     if (divisor < 1)
         divisor = 1;
 
-    *residue += delta; 
+    *residue += delta;
     int16_t arrow_ticks = *residue / divisor;
     if (arrow_ticks != 0) {
         uint16_t key = (arrow_ticks > 0) ? key_pos : key_neg;
@@ -326,7 +326,7 @@ static void trackpoint_work_cb(struct k_work *work) {
         process_arrow_axis(dev, dx, &data->arrow_residue_x,
                            INPUT_BTN_0,  // 左
                            INPUT_BTN_1); // 右
-        
+
         process_arrow_axis(dev, dy, &data->arrow_residue_y,
                            INPUT_BTN_2,  // 上
                            INPUT_BTN_3); // 下
@@ -360,7 +360,7 @@ static void trackpoint_work_cb(struct k_work *work) {
 
         uint8_t tp_led_brt = custom_led_get_last_valid_brightness();
         float tp_factor = MOUSE_SENS_BASE + MOUSE_SENS_STEP * tp_led_brt;
-            
+
 #ifdef CONFIG_TRACKPOINT_EXPONENTIAL
         uint32_t delta = now - data->last_packet_time;
         float exp_mult = trackpoint_exponential_factor(dx, dy, delta);
