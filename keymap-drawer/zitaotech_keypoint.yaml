@@ -52,7 +52,7 @@ layers:
   - LOWER
   - LOWER
   - RAISE
-  - SPACE
+  - {t: SPACE, h: RGUI}
   - MUTE
   - '&td_minus_left'
   - '&td_equal_down'
@@ -218,7 +218,7 @@ layers:
   - LEFT ALT
   - ''
   - Ctl+UP ARROW
-  - ''
+  - {t: SPACE, h: LGUI}
   - {t: ESC, h: LGUI}
   - '&mkp MB1'
   - '&mkp MB1'

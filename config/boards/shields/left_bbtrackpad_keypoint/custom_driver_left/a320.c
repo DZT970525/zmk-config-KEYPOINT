@@ -111,7 +111,7 @@ static int special_key_listener_cb(const zmk_event_t *eh) {
     const struct zmk_position_state_changed *ev = as_zmk_position_state_changed(eh);
     if (!ev)
         return 0;
-    if (ev->position == 17) {
+    if (ev->position == 17 || ev->position == 23) {
         arrow_key_pressed = ev->state;
         LOG_INF("arrow_key position=%d %s", ev->position, arrow_key_pressed ? "PRESSED" : "RELEASED");
     }
@@ -122,7 +122,7 @@ static int special_key_listener_cb(const zmk_event_t *eh) {
         LOG_INF("space position=49 %s", scroll_key_pressed ? "PRESSED" : "RELEASED");
     }
 
-    if (ev->position == 16) {
+    if (ev->position == 16 || ev->position == 22) {
         slow_key_pressed = ev->state;
         LOG_INF("slow_key position=%d %s", ev->position, slow_key_pressed ? "PRESSED" : "RELEASED");
     }
