@@ -244,7 +244,7 @@
 &mt ESC TAB  &kp Q         &kp W  &kp E             &kp R           &kp T         &kp Y             &kp U      &kp I           &kp O           &kp P       &kp BSPC
 &kp CAPS     &kp A         &kp S  &kp D             &kp F           &kp G         &kp LC(UP_ARROW)  &mkp LCLK  &kp H           &kp J           &kp K       &kp L           &td_semi_dquotes  &kp ENTER
 &kp LSHFT    &kp Z         &kp X  &kp C             &kp V           &kp B         &kp PG_DN         &kp PG_UP  &msc SCRL_DOWN  &msc SCRL_UP    &kp N       &kp M           &td_comma_lbrc    &td_dot_rbrc           &td_fslh_up  &kp RSHFT
-&kp LCTRL    &kp LEFT_ALT  &mo 2  &kp LC(UP_ARROW)  &mt LGUI SPACE  &mt LGUI ESC  &mo 1             &mo 1      &mo 2           &mt RGUI SPACE  &kp C_MUTE  &td_minus_left  &td_equal_down    &td_enter_right_grave
+&kp LCTRL    &kp LEFT_ALT  &mo 2  &kp LC(UP_ARROW)  &mt LGUI SPACE  &mt LGUI ESC  &mo 1             &mo 2      &mo 1           &mt RGUI SPACE  &kp C_MUTE  &td_minus_left  &td_equal_down    &td_enter_right_grave
             >;
 
             sensor-bindings =
