@@ -48,10 +48,10 @@ layers:
   - RAISE
   - Ctl+UP ARROW
   - {t: SPACE, h: LGUI}
-  - {t: ESC, h: LGUI}
-  - LOWER
-  - RAISE
-  - LOWER
+  - {t: SPACE, h: LGUI}
+  - {t: ESC, h: LOWER}
+  - {t: BACKSPACE, h: RAISE}
+  - {t: SPACE, h: LOWER}
   - {t: SPACE, h: RGUI}
   - MUTE
   - '&td_minus_left'
@@ -105,10 +105,10 @@ layers:
   - '&td_dShft_0'
   - BT CLR
   - {t: SPACE, h: LGUI}
-  - {t: ESC, h: LGUI}
+  - {t: SPACE, h: LGUI}
   - {t: ENTER, type: held}
-  - ''
-  - ''
+  - ENTER
+  - {t: BACKSPACE, h: RGUI}
   - {t: SPACE, h: RGUI}
   - OUT TOG
   - ''
@@ -135,8 +135,8 @@ layers:
   - ''
   - Ctl+Gui+Q
   - ''
-  - F11
-  - F12
+  - {t: Ctl+LEFT ARROW, h: F11}
+  - {t: Ctl+RIGHT, h: F12}
   - ''
   - ''
   - ''
@@ -161,9 +161,9 @@ layers:
   - LEFT ALT
   - {type: held}
   - MUTE
-  - LGUI
-  - {t: ESC, h: LGUI}
-  - ''
+  - {t: SPACE, h: LGUI}
+  - {t: SPACE, h: LGUI}
+  - ESC
   - ''
   - ''
   - RGUI
@@ -219,7 +219,7 @@ layers:
   - ''
   - Ctl+UP ARROW
   - {t: SPACE, h: LGUI}
-  - {t: ESC, h: LGUI}
+  - {t: SPACE, h: LGUI}
   - '&mkp MB1'
   - '&mkp MB1'
   - '&tdRMCLK'
