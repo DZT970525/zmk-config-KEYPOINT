@@ -241,10 +241,10 @@
         default_layer {
             display-name = "QWERTY";
             bindings = <
-&mt ESC TAB  &kp Q         &kp W  &kp E             &kp R           &kp T         &kp Y             &kp U      &kp I           &kp O           &kp P       &kp BSPC
-&kp CAPS     &kp A         &kp S  &kp D             &kp F           &kp G         &kp LC(UP_ARROW)  &mkp LCLK  &kp H           &kp J           &kp K       &kp L           &td_semi_dquotes  &kp ENTER
-&kp LSHFT    &kp Z         &kp X  &kp C             &kp V           &kp B         &kp PG_DN         &kp PG_UP  &msc SCRL_DOWN  &msc SCRL_UP    &kp N       &kp M           &td_comma_lbrc    &td_dot_rbrc           &td_fslh_up  &kp RSHFT
-&kp LCTRL    &kp LEFT_ALT  &mo 2  &kp LC(UP_ARROW)  &mt LGUI SPACE  &mt LGUI ESC  &mo 1             &mo 2      &mo 1           &mt RGUI SPACE  &kp C_MUTE  &td_minus_left  &td_equal_down    &td_enter_right_grave
+&mt ESC TAB  &kp Q         &kp W  &kp E             &kp R           &kp T           &kp Y             &kp U            &kp I           &kp O           &kp P       &kp BSPC
+&kp CAPS     &kp A         &kp S  &kp D             &kp F           &kp G           &kp LC(UP_ARROW)  &mkp LCLK        &kp H           &kp J           &kp K       &kp L           &td_semi_dquotes  &kp ENTER
+&kp LSHFT    &kp Z         &kp X  &kp C             &kp V           &kp B           &kp PG_DN         &kp PG_UP        &msc SCRL_DOWN  &msc SCRL_UP    &kp N       &kp M           &td_comma_lbrc    &td_dot_rbrc           &td_fslh_up  &kp RSHFT
+&kp LCTRL    &kp LEFT_ALT  &mo 2  &kp LC(UP_ARROW)  &mt LGUI SPACE  &mt LGUI SPACE  &lt 1 ESC         &lt 2 BACKSPACE  &lt 1 SPACE     &mt RGUI SPACE  &kp C_MUTE  &td_minus_left  &td_equal_down    &td_enter_right_grave
             >;
 
             sensor-bindings =
@@ -255,10 +255,10 @@
         lower_layer {
             display-name = "LOWER";
             bindings = <
-&kp ESC    &td_dShft_1   &td_dShft_2  &td_dShft_3  &td_dShft_4     &td_dShft_5   &td_dShft_6  &td_dShft_7  &td_dShft_8  &td_dShft_9     &td_dShft_0   &kp DEL
-&kp CAPS   &td_dShft_4   &td_dShft_5  &td_dShft_6  &trans          &trans        &mkp RCLK    &mkp RCLK    &kp LEFT     &kp RIGHT       &none         &none    &td_dShft_sqt   &kp ENTER
-&kp LSHFT  &td_dShft_7   &td_dShft_8  &td_dShft_9  &trans          &trans        &trans       &trans       &bl BL_DEC   &bl BL_INC      &trans        &trans   &td_dShft_lbkt  &td_dShft_rbkt  &td_dShft_bslh  &kp RSHFT
-&kp LCTRL  &kp LEFT_ALT  &td_dShft_0  &bt BT_CLR   &mt LGUI SPACE  &mt LGUI ESC  &kp ENTER    &none        &none        &mt RGUI SPACE  &out OUT_TOG  &none    &trans          &trans
+&kp ESC    &td_dShft_1   &td_dShft_2  &td_dShft_3  &td_dShft_4     &td_dShft_5     &td_dShft_6  &td_dShft_7  &td_dShft_8         &td_dShft_9     &td_dShft_0   &kp DEL
+&kp CAPS   &td_dShft_4   &td_dShft_5  &td_dShft_6  &trans          &trans          &mkp RCLK    &mkp RCLK    &kp LEFT            &kp RIGHT       &none         &none    &td_dShft_sqt   &kp ENTER
+&kp LSHFT  &td_dShft_7   &td_dShft_8  &td_dShft_9  &trans          &trans          &trans       &trans       &bl BL_DEC          &bl BL_INC      &trans        &trans   &td_dShft_lbkt  &td_dShft_rbkt  &td_dShft_bslh  &kp RSHFT
+&kp LCTRL  &kp LEFT_ALT  &td_dShft_0  &bt BT_CLR   &mt LGUI SPACE  &mt LGUI SPACE  &kp ENTER    &kp ENTER    &mt RGUI BACKSPACE  &mt RGUI SPACE  &out OUT_TOG  &none    &trans          &trans
             >;
 
             sensor-bindings = <&BLE_encoder>, <&inc_dec_kp UP DOWN>;
@@ -267,10 +267,10 @@
         raise_layer {
             display-name = "RAISE";
             bindings = <
-&kp ESC    &kp F1        &td_up_f2  &kp F3      &kp F4    &kp F5        &kp F6         &kp F7  &kp F8   &kp F9    &kp F10        &kp BACKSPACE
-&kp CAPS   &kp LEFT      &kp DOWN   &kp RIGHT   &none     &none         &kp LC(LG(Q))  &none   &kp F11  &kp F12   &none          &none          &none     &kp ENTER
-&kp LSHFT  &none         &none      &none       &none     &none         &none          &none   &none    &none     &none          &none          &none     &none      &kp UP  &kp RSHFT
-&kp LCTRL  &kp LEFT_ALT  &none      &kp C_MUTE  &kp LGUI  &mt LGUI ESC  &none          &none   &none    &kp RGUI  &kp LC(LG(Q))  &kp LEFT       &kp DOWN  &kp RIGHT
+&kp ESC    &kp F1        &td_up_f2  &kp F3      &kp F4          &kp F5          &kp F6         &kp F7  &kp F8                  &kp F9             &kp F10        &kp BACKSPACE
+&kp CAPS   &kp LEFT      &kp DOWN   &kp RIGHT   &none           &none           &kp LC(LG(Q))  &none   &mt F11 LC(LEFT_ARROW)  &mt F12 LC(RIGHT)  &none          &none          &none     &kp ENTER
+&kp LSHFT  &none         &none      &none       &none           &none           &none          &none   &none                   &none              &none          &none          &none     &none      &kp UP  &kp RSHFT
+&kp LCTRL  &kp LEFT_ALT  &none      &kp C_MUTE  &mt LGUI SPACE  &mt LGUI SPACE  &kp ESC        &none   &none                   &kp RGUI           &kp LC(LG(Q))  &kp LEFT       &kp DOWN  &kp RIGHT
             >;
 
             sensor-bindings =
@@ -281,10 +281,10 @@
         MOUSE_layer {
             display-name = "MOUSE";
             bindings = <
-&kp ESC    &kp LC(LEFT)  &kp UP    &kp LC(RIGHT)     &none           &none         &mkp RCLK   &none             &none         &none          &none  &kp BSPC
-&kp CAPS   &kp LEFT      &kp DOWN  &kp RIGHT         &none           &none         &kp LC(UP)  &mkp LCLK         &kp LC(LEFT)  &kp LC(RIGHT)  &none  &none     &none  &kp ENTER
-&kp LSHFT  &none         &none     &none             &none           &none         &none       &none             &none         &none          &none  &none     &none  &none      &none  &kp RSHFT
-&kp LCTRL  &kp LEFT_ALT  &none     &kp LC(UP_ARROW)  &mt LGUI SPACE  &mt LGUI ESC  &mkp MB1    &LMouse_sc 0 MB1  &tdRMCLK      &none          &none  &none     &none  &none
+&kp ESC    &kp LC(LEFT)  &kp UP    &kp LC(RIGHT)     &none           &none           &mkp RCLK   &none             &none         &none          &none  &kp BSPC
+&kp CAPS   &kp LEFT      &kp DOWN  &kp RIGHT         &none           &none           &kp LC(UP)  &mkp LCLK         &kp LC(LEFT)  &kp LC(RIGHT)  &none  &none     &none  &kp ENTER
+&kp LSHFT  &none         &none     &none             &none           &none           &none       &none             &none         &none          &none  &none     &none  &none      &none  &kp RSHFT
+&kp LCTRL  &kp LEFT_ALT  &none     &kp LC(UP_ARROW)  &mt LGUI SPACE  &mt LGUI SPACE  &mkp MB1    &LMouse_sc 0 MB1  &tdRMCLK      &none          &none  &none     &none  &none
             >;
 
             sensor-bindings = <&inc_dec_kp LC(RIGHT) LC(LEFT)>;
