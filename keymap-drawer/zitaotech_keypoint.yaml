@@ -1,7 +1,7 @@
 layout: {zmk_keyboard: zitaotech_keypoint}
 layers:
   QWERTY:
-  - {t: TAB, h: ESC}
+  - {t: '`', h: ESC}
   - Q
   - W
   - E
@@ -41,24 +41,23 @@ layers:
   - M
   - ','
   - .
+  - UP ARROW
   - /
-  - RSHFT
   - LCTRL
   - LGUI
   - LALT
   - MUTE
-  - RAISE
-  - SPACE
+  - {t: SPACE, h: LOWER}
+  - {t: SPACE, h: RAISE}
   - LOWER
   - LOWER
-  - SPACE
-  - RAISE
+  - {t: SPACE, h: LOWER}
+  - {t: DELETE, h: MOUSE}
   - MUTE
-  - '-'
-  - '='
-  - '`'
+  - LEFT
+  - DOWN
+  - RIGHT
   LOWER:
-  - ESC
   - '1'
   - '2'
   - '3'
@@ -69,7 +68,8 @@ layers:
   - '8'
   - '9'
   - '0'
-  - DEL
+  - '-'
+  - '='
   - CAPS
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -78,14 +78,14 @@ layers:
   - {t: ▽, type: trans}
   - '&mkp RCLK'
   - '&mkp RCLK'
+  - KP NUMLOCK
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - '['
+  - ']'
   - ''''
   - ENTER
   - LSHFT
-  - {t: ▽, type: trans}
+  - PRINTSCREEN
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -95,21 +95,21 @@ layers:
   - '&bl BL_DEC'
   - '&bl BL_INC'
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - '['
-  - ']'
+  - {t: MOUSE, h: toggle}
+  - ;
+  - ''''
   - NUBS
   - RSHFT
-  - LCTRL
+  - {t: QWERTY, h: toggle}
   - LGUI
   - '&bootloader'
   - BT CLR
-  - {t: ▽, type: trans}
+  - {type: held}
   - SPACE
-  - {t: LOWER, type: held}
+  - LOWER
   - LOWER
   - SPACE
-  - {t: MOUSE, h: toggle}
+  - RIGHT SHIFT
   - OUT TOG
   - '&bootloader'
   - {t: ▽, type: trans}
@@ -117,7 +117,7 @@ layers:
   RAISE:
   - ESC
   - F1
-  - UP
+  - F2
   - F3
   - F4
   - F5
@@ -157,12 +157,12 @@ layers:
   - ''
   - ''
   - ''
-  - LCTRL
+  - {t: QWERTY, h: toggle}
   - LGUI
   - ''
   - ''
-  - {t: RAISE, type: held}
-  - ''
+  - RAISE
+  - {type: held}
   - ''
   - ''
   - ''
@@ -178,17 +178,17 @@ layers:
   - E
   - R
   - T
-  - Y
+  - Ctl+Y
   - {t: U, h: '&mkp MB3'}
   - I
   - O
   - P
   - BSPC
   - CAPS
-  - A
-  - S
-  - D
-  - F
+  - Ctl+A
+  - Ctl+S
+  - Ctl+D
+  - Ctl+F
   - G
   - '&mkp LCLK'
   - '&mkp LCLK'
@@ -199,11 +199,11 @@ layers:
   - ;
   - ENTER
   - LSHFT
-  - Z
-  - X
-  - C
-  - V
-  - B
+  - Ctl+Z
+  - Ctl+X
+  - Ctl+C
+  - Ctl+V
+  - Ctl+B
   - '&msc SCRL_DOWN'
   - '&msc SCRL_UP'
   - ''
@@ -214,7 +214,7 @@ layers:
   - .
   - /
   - RSHFT
-  - LCTRL
+  - {t: QWERTY, h: toggle}
   - LGUI
   - LALT
   - ''
@@ -223,7 +223,7 @@ layers:
   - '&mkp MB1'
   - '&mkp MB1'
   - '&tdRMCLK'
-  - RAISE
+  - {t: RAISE, type: held}
   - MUTE
   - '-'
   - '='

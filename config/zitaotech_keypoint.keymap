@@ -75,49 +75,50 @@
     };
 
 
-    keymap {
+ keymap {
         compatible = "zmk,keymap";
 
-         default_layer {
-            display-name = "QWERTY";    
-           bindings = <
-&mt ESC TAB &kp Q  &kp W      &kp E      &kp R     &kp T                                                                 &kp Y       &kp U    &kp I      &kp O     &kp P     &kp BSPC
-&kp CAPS  &kp A    &kp S      &kp D      &kp F     &kp G     &mkp LCLK                    &mkp LCLK                      &kp H       &kp J    &kp K      &kp L     &kp SEMI  &kp ENTER
-&kp LSHFT &kp Z    &kp X      &kp C      &kp V     &kp B     &kp PG_DN  &kp PG_UP         &msc SCRL_DOWN  &msc SCRL_UP   &kp N       &kp M    &kp COMMA  &kp DOT   &kp FSLH  &kp RSHFT
-&kp LCTRL &kp LGUI &kp LALT   &kp C_MUTE &mo 2     &kp SPACE &mo 1                                        &mo 1          &kp SPACE   &mo 2    &kp C_MUTE &kp MINUS &kp EQUAL &kp GRAVE
-           >;
-           sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp LEFT RIGHT>;
-        };
+        default_layer {
+            display-name = "QWERTY";
+            bindings = <
+&mt ESC GRAVE  &kp Q     &kp W     &kp E       &kp R        &kp T        &kp Y      &kp U      &kp I           &kp O         &kp P       &kp BSPC
+&kp CAPS       &kp A     &kp S     &kp D       &kp F        &kp G        &mkp LCLK  &mkp LCLK  &kp H           &kp J         &kp K       &kp L     &kp SEMI   &kp ENTER
+&kp LSHFT      &kp Z     &kp X     &kp C       &kp V        &kp B        &kp PG_DN  &kp PG_UP  &msc SCRL_DOWN  &msc SCRL_UP  &kp N       &kp M     &kp COMMA  &kp DOT    &kp UP_ARROW  &kp SLASH
+&kp LCTRL      &kp LGUI  &kp LALT  &kp C_MUTE  &lt 1 SPACE  &lt 2 SPACE  &mo 1      &mo 1      &lt 1 SPACE     &lt 3 DELETE  &kp C_MUTE  &kp LEFT  &kp DOWN   &kp RIGHT
+            >;
 
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp LEFT RIGHT>;
+        };
 
         lower_layer {
             display-name = "LOWER";
             bindings = <
-&kp ESC   &kp N1    &kp N2     &kp N3       &kp N4   &kp N5                                                               &kp N6    &kp N7   &kp N8       &kp N9    &kp N0     &kp DEL
-&kp CAPS  &trans    &trans     &trans       &trans   &trans           &mkp RCLK                    &mkp RCLK              &trans    &trans   &trans       &trans    &kp SQT    &kp ENTER
-&kp LSHFT &trans    &trans     &trans       &trans   &trans           &trans     &trans            &bl BL_DEC  &bl BL_INC &trans    &trans   &kp LBKT     &kp RBKT  &kp NUBS   &kp RSHFT
-&kp LCTRL &kp LGUI  &BOT       &bt BT_CLR   &trans   &kp SPACE        &mo 1                                    &mo 1      &kp SPACE &to 3    &out OUT_TOG &BOT      &trans     &trans
+&kp NUMBER_1  &kp NUMBER_2     &kp NUMBER_3  &kp NUMBER_4  &kp N5  &kp NUMBER_6  &kp N7     &kp N8     &kp N9          &kp N0           &kp MINUS         &kp EQUAL
+&kp CAPS      &trans           &trans        &trans        &trans  &trans        &mkp RCLK  &mkp RCLK  &kp KP_NUMLOCK  &trans           &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp SQT        &kp ENTER
+&kp LSHFT     &kp PRINTSCREEN  &trans        &trans        &trans  &trans        &trans     &trans     &bl BL_DEC      &bl BL_INC       &trans            &to 3              &kp SEMICOLON  &kp SQT    &kp NUBS  &kp RSHFT
+&to 0         &kp LGUI         &BOT          &bt BT_CLR    &trans  &kp SPACE     &mo 1      &mo 1      &kp SPACE       &kp RIGHT_SHIFT  &out OUT_TOG      &BOT               &trans         &trans
             >;
-             sensor-bindings = <&BLE_encoder &inc_dec_kp UP DOWN>;
+
+            sensor-bindings = <&BLE_encoder &inc_dec_kp UP DOWN>;
         };
 
         raise_layer {
             display-name = "RAISE";
             bindings = <
-&kp ESC       &kp F1    &kp UP     &kp F3    &kp F4   &kp F5                                                    &kp F6      &kp F7  &kp F8   &kp F9  &kp F10  &none
-&kp CAPS      &kp LEFT  &kp DOWN   &kp RIGHT &none    &none   &none                        &none                &kp F11     &kp F12 &none    &none  &none     &none
-&kp LSHFT     &none     &none      &none     &none    &none   &none   &none                &none  &none         &none       &none   &none    &none  &none     &none
-&kp LCTRL     &kp LGUI  &none      &none     &mo 2    &none   &none                               &none         &none       &mo 2   &none    &none  &none     &none 
+&kp ESC    &kp F1    &kp F2    &kp F3     &kp F4  &kp F5  &kp F6  &kp F7  &kp F8   &kp F9   &kp F10  &none
+&kp CAPS   &kp LEFT  &kp DOWN  &kp RIGHT  &none   &none   &none   &none   &kp F11  &kp F12  &none    &none  &none  &none
+&kp LSHFT  &none     &none     &none      &none   &none   &none   &none   &none    &none    &none    &none  &none  &none  &none  &none
+&to 0      &kp LGUI  &none     &none      &mo 2   &none   &none   &none   &none    &mo 2    &none    &none  &none  &none
             >;
         };
 
         MOUSE_layer {
             display-name = "MOUSE";
             bindings = <
-&kp TAB   &kp Q     &kp W          &kp E     &kp R     &kp T                                                         &kp Y       &M_kp MB3 U    &kp I      &kp O     &kp P     &kp BSPC
-&kp CAPS  &kp A     &kp S          &kp D     &kp F     &kp G      &mkp LCLK                         &mkp LCLK        &kp H       &M_kp MB1 J    &kp K      &kp L     &kp SEMI  &kp ENTER
-&kp LSHFT &kp Z     &kp X          &kp C     &kp V     &kp B      &msc SCRL_DOWN   &msc SCRL_UP     &none  &none     &kp N       &M_kp MB2 M    &kp COMMA  &kp DOT   &kp FSLH  &kp RSHFT
-&kp LCTRL &kp LGUI  &kp  LALT      &none     &mo 2     &kp SPACE  &mkp MB1                         &LMouse_sc 0 MB1  &tdRMCLK    &mo 2          &kp C_MUTE &kp MINUS &kp EQUAL &kp GRAVE
+&kp TAB    &kp Q      &kp W      &kp E      &kp R      &kp T      &kp LC(Y)       &M_kp MB3 U       &kp I     &kp O        &kp P       &kp BSPC
+&kp CAPS   &kp LC(A)  &kp LC(S)  &kp LC(D)  &kp LC(F)  &kp G      &mkp LCLK       &mkp LCLK         &kp H     &M_kp MB1 J  &kp K       &kp L        &kp SEMI   &kp ENTER
+&kp LSHFT  &kp LC(Z)  &kp LC(X)  &kp LC(C)  &kp LC(V)  &kp LC(B)  &msc SCRL_DOWN  &msc SCRL_UP      &none     &none        &kp N       &M_kp MB2 M  &kp COMMA  &kp DOT    &kp FSLH  &kp RSHFT
+&to 0      &kp LGUI   &kp LALT   &none      &mo 2      &kp SPACE  &mkp MB1        &LMouse_sc 0 MB1  &tdRMCLK  &mo 2        &kp C_MUTE  &kp MINUS    &kp EQUAL  &kp GRAVE
             >;
         };
 
